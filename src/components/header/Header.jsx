@@ -4,7 +4,6 @@ import { useContext } from "react";
 import { CurrentProductsContext } from "../../context/CurrentProductsContext";
 import { ProductsContext } from "../../context/ProductsContext";
 import ShoppingBag from "../shopping_bag/ShoppingBag";
-import { Button } from "@mui/material";
 
 function Header() {
   const [showSearch, setShowSearch] = useState(false);

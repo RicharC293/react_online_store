@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { CurrentProductsContext } from "../../context/CurrentProductsContext";
 import { ProductsContext } from "../../context/ProductsContext";
 import ShoppingBag from "../shopping_bag/ShoppingBag";
+import { Button } from "@mui/material";
 
 function Header() {
   const [showSearch, setShowSearch] = useState(false);
@@ -35,6 +36,16 @@ function Header() {
         >
           Niños
         </Link>
+        <button
+          className="text-xl font-semibold hover:text-gray-700 cursor-pointer"
+          onClick={
+            () => {
+              window.open("https://api.whatsapp.com/send?phone=593983736422&text=Hola%20necesito%20devolver%20unos%20zapatos", "_blank");
+            }
+          }
+        >
+          Contactar
+        </button>
       </div>
       <div className="flex gap-4 items-center">
         {showSearch && (

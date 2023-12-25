@@ -74,7 +74,13 @@ function ProductDetail() {
         <button onClick={goBack}>
           <img src="../../assets/return.png" alt="regresar" width={25} />
         </button>
-        <button>
+        <button
+          onClick={() =>
+            window.open(
+              `https://wa.me/593983736422?text=Hola! Estoy interesado en ${product.name}`
+            )
+          }
+        >
           <img src="../../assets/share.png" alt="compartir" width={25} />
         </button>
       </div>

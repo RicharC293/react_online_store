@@ -4,11 +4,27 @@ import "./product-detail.css";
 import { useNavigate } from "react-router-dom";
 import { LinearProgress } from "@mui/material";
 import { useContext } from "react";
+import { useState } from "react";
 import { CartProductsContext } from "../../context/CartProductsContext";
+import Snackbar from "@mui/material/Snackbar";
 
 function ProductDetail() {
   const { productId } = useParams();
   const { cartProducts, setCartProducts } = useContext(CartProductsContext);
+
+  const [open, setOpen] = useState(false);
+
+  const successAddedToCart = () => {
+    setOpen(true);
+  };
+
+  const closeSnackbar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
 
   const allShoes = useAllShoes();
   const navigate = useNavigate();
@@ -44,6 +60,7 @@ function ProductDetail() {
               const productInCart = cartProducts.find(
                 (productInCart) => productInCart.id === product.id
               );
+              successAddedToCart();
               if (productInCart) {
                 const newCartProducts = cartProducts.map((productInCart) => {
                   if (productInCart.id === product.id) {
@@ -84,6 +101,13 @@ function ProductDetail() {
           <img src="../../assets/share.png" alt="compartir" width={25} />
         </button>
       </div>
+      <Snackbar
+        open={open}
+        autoHideDuration={2000}
+        onClose={closeSnackbar}
+        message={`${product.name} añadido al carrito`}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+      />
     </div>
   );
 }

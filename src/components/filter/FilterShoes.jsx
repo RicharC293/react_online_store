@@ -1,14 +1,14 @@
 import Checkbox from "../selectors/checkbox/Checkbox";
 import { useContext } from "react";
 import { ProductsContext } from "../../context/ProductsContext";
-import { CurrentProductsContext } from "../../context/CurrentProductsContext";
+import { search } from "../../services/search";
+
 var typesFilter = [];
 
 function FilterShoes() {
   const { setProducts } = useContext(ProductsContext);
-  const { currentProducts } = useContext(CurrentProductsContext);
 
-  const handleFilter = (e) => {
+  const handleFilter = async (e) => {
     console.log(e.target.value);
     console.log(typesFilter);
     if (e.target.checked) {
@@ -18,10 +18,13 @@ function FilterShoes() {
     }
 
     console.log(typesFilter);
+    
+    const location = window.location.pathname;
+    const fetchedProducts = await search('', location);
 
-    if (typesFilter.length === 0) return setProducts(currentProducts);
+    if (typesFilter.length === 0) return setProducts(fetchedProducts);
 
-    const newProducts = currentProducts.filter((product) =>
+    const newProducts = fetchedProducts.filter((product) =>
       typesFilter.includes(product.type)
     );
     setProducts(newProducts);
